@@ -1,0 +1,11 @@
+[bastion]
+boot
+[master]
+m1
+[slave]
+a1
+a2
+a3
+[spark:children]
+master
+slave
