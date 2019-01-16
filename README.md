@@ -4,7 +4,7 @@ Setup and Test Elasticsearch
 
 # jan2019
 
-Trying to achieve the maximum ingest possible of [planes](../planes) data.  
+Trying to achieve the maximum ingest possible of [planes](./planes) data.  
 
 
 Using Azure D16s_v3 (16 cores / 64GB mem)
