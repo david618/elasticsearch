@@ -292,6 +292,7 @@ Rates in k/s (1000/s).  Number sent in millions.
 |Requested Send Rate|Actual Send Rate|KafkaTopicMon Rate|Elasticsearch Mon Rate|Number Sent|
 |-------------------|----------------|------------------|----------------------|-----------|
 |1x200              |200             |200               |190 dropping to 175   |100         |
+|1x200              |200             |200               |185 dropping to 160   |100         |
 
 
 No notable difference when increasing from 5 to 7 Elasticsearch nodes.
