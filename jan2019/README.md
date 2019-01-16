@@ -12,9 +12,10 @@ Azure
 - a41, a42, and a43 (DS16v3): Kafka_2.11-2.1.0
 - a61, a62, and a63 (DS16v3): Elasticsearch 6.5  
 
-Spark, Kafka, and Elasticsearch installed using Ansible.
-
-Elasticsearch [Ansible](../ansible-install-elasticsearch)
+Installed
+- [Spark](../ansible-install-spark)
+- [Kafka](../ansible-install-kafka)
+- [Elasticsearch](../ansible-install-elasticsearch) installed using Ansible.
 
 
 ## Create Kafka Topic
@@ -29,6 +30,86 @@ sudo su - kafka
 Same Kafka Topic used for both Datastax and Elasticsearch testing.
 
 **Note:** Don't run both Elasticsearch and Datastax tests at same time. Both use same Kafka; would impact results.
+
+## Build and Deploy sparktest
+
+On boot server build and deploy [sparktest](https://github.com/david618/sparktest)
+
+```
+sudo yum -y install epel-release
+sudo yum -y install git maven
+git clone https://github.com/david618/sparktest
+cd sparktest
+mvn install
+```
+
+Sparktest has several test tools that can send data to Elasticsearch. 
+
+
+## Deploy sparktest to Spark Cluster
+
+On boot
+
+```
+cd ~
+tar cvzf sparktest-files.tgz sparktest/target/sparktest.jar sparktest/target/dependency-jars/* sparktest/log4j2conf.xml sparktest/planes.csv
+```
+
+Use Ansible Playbook to copy to the Spark agents.
+
+```
+ansible-playbook --private-key /home/azureuser/az -i hosts playbooks/deploy_sparktest-files.yaml
+```
+
+This copies and extracts the files in sparktest-files.tgz on each of the Spark agents.
+
+## Deploy rttest
+
+The [rttest](https://github.com/david618/rttest) has a tool to send a file to Kafka; and monitor rates of change of a Kafka topic or Elasticsearch index.
+
+
+On boot
+
+```
+git clone https://github.com/david618/rttest
+cd rttest 
+mvn install
+```
+
+Create tar zip with rttest.
+
+```
+cd ~
+tar cvzf rttest-files.tgz rttest/target/rttest-full.jar rttest/target/rttest.jar rttest/target/lib/* rttest/planes.json rttest/planes.csv
+```
+
+```
+ansible-playbook --private-key /home/azureuser/az -i hosts playbooks/deploy_rttest-files.yaml
+```
+
+This deploys to Spark nodes; however, it lays the app down in the sudoer's home (e.g. /home/azureuser)
+
+
+## Position Test Files on Spark Nodes
+
+We need to move some of the test data files from S3 to local servers to support streaming from Kafka to Cassandra.
+
+Secure shell to Spark slave.
+
+Download a file(s).  For example:  
+
+```
+curl -O https://s3.amazonaws.com/esriplanes/lat88/million/planes00001
+```
+
+Downloaded planes00001 to a1
+Downloaded planes00002 to a2
+Downloaded planes00003 to a3
+
+The Kafka tool sends data from the file and will start from top again if needed (e.g. you send more than 5 million lines).
+
+The Spark job changes the plane id to a UUID string; therefore, the (id, ts) will be unique for each line send to Cassaandra.
+
 
 ## Run Spark Job
 
