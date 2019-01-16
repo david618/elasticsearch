@@ -50,6 +50,3 @@ They are publically accessible via https (e.g. [https://s3.amazonaws.com/esripla
 
 Files can also be accessed using a S3 key for ReadOnlyUser.  Ask David Jennings for key if you need it.
 
-# Generation
-
-The sample data was generated using [planes](https://github.com/david618/planes)
