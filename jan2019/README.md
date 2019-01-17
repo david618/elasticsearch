@@ -297,4 +297,82 @@ Rates in k/s (1000/s).  Number sent in millions.
 
 No notable difference when increasing from 5 to 7 Elasticsearch nodes.
 
+# Tuning 
 
+Sending 100 million messages at 200k/s.
+
+Tried some tuning https://support.elastic.co/customers/s/article/Performance-Adjustments-during-Bulk-Load
+
+```
+1) Shard Higher
+
+Danger!  A cluster that has too many shards can be inefficient and even dangerous to the cluster.  Aim for 30-50gb per shard, and 1 shard per CPU core.
+
+When you increase the amount of shards, you distribute them across multiple elasticsearch nodes. When you perform you bulk index, the write operations are distributed among the nodes, increasing the total possible throughput. Also make sure that your bulk operation HTTP requests are distributed / load balanced across nodes.
+
+There's no need to shard any higher than # of data nodes available.
+
+These settings must be applied to the index before it is created, and cannot be changed after.
+
+curl -XPUT "http://localhost:9200/my_index/"" -d' { "settings" : { "index" : { "number_of_shards" : 10 } } }'
+```
+
+We've been using 2x number of nodes.  (e.g. 14 shards)
+
+Tried changing to 112 (16 cores per dse per 7 nodes); rate dropped to 65k/s.
+
+```
+2) Disable Replicas on the target index
+
+The more replicas, the more work when writing. You should set replicas to 0 during your import, then set it higher when the import is complete. You can change this setting freely on existing indices.
+
+curl -XPUT localhost:9200/my_index/_settings -d '{ "index" : { "number_of_replicas" : 0 } }'
+
+When you are done the import, set it back to 1 or more.
+```
+Replicas were set to 0 for all tests.
+
+
+```
+3) Reduce Refresh on the target index
+
+Reducing the refresh interval greatly improves write performance.
+
+curl -XPUT localhost:9200/my_index/_settings -d '{ "index" : { "refresh_interval" : "30s" } }'
+
+When you are done the import, set it back to the default, which is "1s" , 1 Second. 
+```
+
+We tested with 60s.
+
+```
+4) Increase Translog Flush Size
+
+The Translog ensures that data written is saved to disk in case of failure, and is written periodically after a certain amount of time and/or data. 
+
+curl -XPUT a61:9200/planes/_settings -H 'Content-Type: application/json' -d '{ "index" : { "translog.flush_threshold_size" : "1GB" } }'
+
+When you are done the import, set it back to the default, which is "512mb" .
+```
+
+Tested at 1G.  Tested loading 100M at 200k/s.  Same results loaded at 190 dropping to 175.
+
+```
+5) Bulk Queue Size
+
+curl -XPUT a61:9200/_cluster/settings -H 'Content-Type: application/json'  -d '{ "transient" : { "threadpool.bulk.queue_size" : 200 } }'
+
+When you are done the import, set it back to the default, which is 50 .
+
+6) Disable Merge Throttling
+
+Note that this particular setting is not of any use in Elasticsearch 2.x+ because merge throttling is now automatic.
+
+curl -XPUT a61:9200/_cluster/settings -H 'Content-Type: application/json'   -d '{ "transient" : { "indices.store.throttle.type" : "none" } }' 
+```
+
+Both 5 and 6 could not be applied.  Elasticsearch reported error:
+
+```
+{"error":{"root_cause":[{"type":"remote_transport_exception","reason":"[a65][10.0.0.16:9300][cluster:admin/settings/update]"}],"type":"illegal_argument_exception","reason":"transient setting [indices.store.throttle.type], not recognized"},"status":400}
+```
