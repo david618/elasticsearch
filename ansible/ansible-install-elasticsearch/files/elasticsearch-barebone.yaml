@@ -1,5 +1,0 @@
-node.name: ${HOSTNAME}
-http.host: [_site_,_local_]
-network.host: [_site_,_local_]
-discovery.zen.ping.unicast.hosts: ["a61", "a62", "a63"]
-discovery.zen.minimum_master_nodes: 2
