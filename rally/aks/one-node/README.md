@@ -1,4 +1,6 @@
+```
 esrally --track=geonames --target-hosts=datastore-elasticsearch-headless:9200 --pipeline=benchmark-only
+```
 
 
 ```
