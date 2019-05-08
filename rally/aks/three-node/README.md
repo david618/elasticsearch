@@ -1,4 +1,6 @@
-
+```
+esrally --track=geonames --target-hosts=a1:9200 --pipeline=benchmark-only
+```
 
 ```
     ____        ____
