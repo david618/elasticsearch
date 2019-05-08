@@ -1,9 +1,8 @@
+```
 esrally --track=geonames --target-hosts=a1:9200 --pipeline=benchmark-only
+```
 
-
-One node VM
-
-
+```
     ____        ____
    / __ \____ _/ / /_  __
   / /_/ / __ `/ / / / / /
@@ -69,6 +68,8 @@ Running large_prohibited_terms                                                 [
  / __/ / / / / / /_/ / /   ___/ / /__/ /_/ / /  /  __/
 /_/   /_/_/ /_/\__,_/_/   /____/\___/\____/_/   \___/
 ------------------------------------------------------
+
+```
 
 |   Lap |                                                         Metric |                           Task |     Value |    Unit |
 |------:|---------------------------------------------------------------:|-------------------------------:|----------:|--------:|
@@ -375,7 +376,8 @@ Running large_prohibited_terms                                                 [
 |   All |                                  100th percentile service time |         large_prohibited_terms |   815.068 |      ms |
 |   All |                                                     error rate |         large_prohibited_terms |         0 |       % |
 
-
+```
 ----------------------------------
 [INFO] SUCCESS (took 3355 seconds)
 ----------------------------------
+```
