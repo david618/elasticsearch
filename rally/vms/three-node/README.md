@@ -371,3 +371,110 @@ Running large_prohibited_terms                                                 [
 [INFO] SUCCESS (took 3256 seconds)
 ----------------------------------
 ```
+
+Reran with just index-append
+
+```
+esrally --track=geonames --target-hosts=a1:9200 --pipeline=benchmark-only --include-tasks="index-append"
+```
+
+```
+    ____        ____
+   / __ \____ _/ / /_  __
+  / /_/ / __ `/ / / / / /
+ / _, _/ /_/ / / / /_/ /
+/_/ |_|\__,_/_/_/\__, /
+                /____/
+
+
+************************************************************************
+************** WARNING: A dark dungeon lies ahead of you  **************
+************************************************************************
+
+Rally does not have control over the configuration of the benchmarked
+Elasticsearch cluster.
+
+Be aware that results may be misleading due to problems with the setup.
+Rally is also not able to gather lots of metrics at all (like CPU usage
+of the benchmarked cluster) or may even produce misleading metrics (like
+the index size).
+
+************************************************************************
+****** Use this pipeline only if you are aware of the tradeoffs.  ******
+*************************** Watch your step! ***************************
+************************************************************************
+
+[INFO] Racing on track [geonames], challenge [append-no-conflicts] and car ['external'] with version [7.0.1].
+
+Running index-append                                                           [100% done]
+
+------------------------------------------------------
+    _______             __   _____
+   / ____(_)___  ____ _/ /  / ___/_________  ________
+  / /_  / / __ \/ __ `/ /   \__ \/ ___/ __ \/ ___/ _ \
+ / __/ / / / / / /_/ / /   ___/ / /__/ /_/ / /  /  __/
+/_/   /_/_/ /_/\__,_/_/   /____/\___/\____/_/   \___/
+------------------------------------------------------
+```
+
+
+|   Lap |                                                         Metric |         Task |     Value |   Unit |
+|------:|---------------------------------------------------------------:|-------------:|----------:|-------:|
+|   All |                     Cumulative indexing time of primary shards |              |   19.6524 |    min |
+|   All |             Min cumulative indexing time across primary shards |              |   19.6524 |    min |
+|   All |          Median cumulative indexing time across primary shards |              |   19.6524 |    min |
+|   All |             Max cumulative indexing time across primary shards |              |   19.6524 |    min |
+|   All |            Cumulative indexing throttle time of primary shards |              |         0 |    min |
+|   All |    Min cumulative indexing throttle time across primary shards |              |         0 |    min |
+|   All | Median cumulative indexing throttle time across primary shards |              |         0 |    min |
+|   All |    Max cumulative indexing throttle time across primary shards |              |         0 |    min |
+|   All |                        Cumulative merge time of primary shards |              |   3.86303 |    min |
+|   All |                       Cumulative merge count of primary shards |              |        25 |        |
+|   All |                Min cumulative merge time across primary shards |              |   3.86303 |    min |
+|   All |             Median cumulative merge time across primary shards |              |   3.86303 |    min |
+|   All |                Max cumulative merge time across primary shards |              |   3.86303 |    min |
+|   All |               Cumulative merge throttle time of primary shards |              |   1.17977 |    min |
+|   All |       Min cumulative merge throttle time across primary shards |              |   1.17977 |    min |
+|   All |    Median cumulative merge throttle time across primary shards |              |   1.17977 |    min |
+|   All |       Max cumulative merge throttle time across primary shards |              |   1.17977 |    min |
+|   All |                      Cumulative refresh time of primary shards |              |  0.298483 |    min |
+|   All |                     Cumulative refresh count of primary shards |              |        32 |        |
+|   All |              Min cumulative refresh time across primary shards |              |  0.298483 |    min |
+|   All |           Median cumulative refresh time across primary shards |              |  0.298483 |    min |
+|   All |              Max cumulative refresh time across primary shards |              |  0.298483 |    min |
+|   All |                        Cumulative flush time of primary shards |              |   1.10467 |    min |
+|   All |                       Cumulative flush count of primary shards |              |         8 |        |
+|   All |                Min cumulative flush time across primary shards |              |   1.10467 |    min |
+|   All |             Median cumulative flush time across primary shards |              |   1.10467 |    min |
+|   All |                Max cumulative flush time across primary shards |              |   1.10467 |    min |
+|   All |                                             Total Young Gen GC |              |    26.363 |      s |
+|   All |                                               Total Old Gen GC |              |     0.204 |      s |
+|   All |                                                     Store size |              |   7.56237 |     GB |
+|   All |                                                  Translog size |              |   1.13269 |     GB |
+|   All |                                         Heap used for segments |              |   16.6163 |     MB |
+|   All |                                       Heap used for doc values |              | 0.0210648 |     MB |
+|   All |                                            Heap used for terms |              |   15.4101 |     MB |
+|   All |                                            Heap used for norms |              | 0.0612793 |     MB |
+|   All |                                           Heap used for points |              |  0.296718 |     MB |
+|   All |                                    Heap used for stored fields |              |  0.827202 |     MB |
+|   All |                                                  Segment count |              |        78 |        |
+|   All |                                                 Min Throughput | index-append |   30172.7 | docs/s |
+|   All |                                              Median Throughput | index-append |   30865.8 | docs/s |
+|   All |                                                 Max Throughput | index-append |   31500.6 | docs/s |
+|   All |                                        50th percentile latency | index-append |    1042.4 |     ms |
+|   All |                                        90th percentile latency | index-append |   1574.35 |     ms |
+|   All |                                        99th percentile latency | index-append |   5830.33 |     ms |
+|   All |                                      99.9th percentile latency | index-append |   7876.88 |     ms |
+|   All |                                       100th percentile latency | index-append |   8885.73 |     ms |
+|   All |                                   50th percentile service time | index-append |    1042.4 |     ms |
+|   All |                                   90th percentile service time | index-append |   1574.35 |     ms |
+|   All |                                   99th percentile service time | index-append |   5830.33 |     ms |
+|   All |                                 99.9th percentile service time | index-append |   7876.88 |     ms |
+|   All |                                  100th percentile service time | index-append |   8885.73 |     ms |
+|   All |                                                     error rate | index-append |         0 |      % |
+
+```
+---------------------------------
+[INFO] SUCCESS (took 378 seconds)
+---------------------------------
+```
