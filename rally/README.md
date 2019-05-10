@@ -1,12 +1,13 @@
 ### Kafka-Spark-Elasticsearch Testing
+We are trying to achieve the best ingest docs per second into Elasticsearch.
 
-We conducted ingest testing using Kafka-Spark-Elasticsearch using Azure VM's.  We were able to scale the ingest up to over 1 million docs/s using 40 Elasticsearch nodes.
+We conducted ingest testing using Kafka-Spark-Elasticsearch using Azure VM's. We were able to scale the ingest up to over 1 million docs/s using 40 Elasticsearch nodes.
 
-We tested this same Kafka-Spark-Elasticearch on AKS (Kubernetes) using one the three Elasticsearch nodes using AKS; however, the ingest rates was about 20% of what we got on VM's.
+We tested this same Kafka-Spark-Elasticearch on AKS (Kubernetes) using one and three Elasticsearch nodes using AKS; however, the ingest rates was about 20% of what we saw when using Azure VM's.
 
-We tried numerous tuning excercises to try to isolate why AKS was not perfoming as well and was not scaling.
+We tried numerous tuning exercises to try to isolate why AKS was not performing as well and was not scaling.
 
-See [elastic-ingest](https://github.com/david618/elastic-ingest) repo for more details of the testing.
+See this [repo](https://github.com/david618/elasticsearch/tree/master/rally) for more details of the testing.
 
 
 # Rally Testing
