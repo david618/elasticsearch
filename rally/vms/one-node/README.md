@@ -1,11 +1,11 @@
-#### Run Rally Test
+#### Geonames delete,index,append
 
 ```
 esrally configure
 esrally --track=geonames --target-hosts=a1:9200 --pipeline=benchmark-only --include-tasks="delete-index,create-index,index-append" --report-file=report.md
 ```
 
-#### Results One Node
+#### Results One Elasticsearch Node
 
 
 |   Lap |                                                         Metric |         Task |     Value |   Unit |
