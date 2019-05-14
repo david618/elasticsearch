@@ -15,7 +15,7 @@
  
  Throughtput of three nodes is almost the same as one node. 
  
-- [2019-05-14]((./2019-05-14)
+- [2019-05-14](./2019-05-14)
   - Used latest Helm chart
   - Elasticsearch 7.0.1
   - 3 node results 31 k/s
