@@ -22,7 +22,7 @@ Tested using VM's and AKS.
 
 Tested using one and three Elasticsearch nodes.
 
-|Running On|geonames 1 node|geonames 3 nodes|nyc_taxis 1 node|nyx_taxis 3 nodes|
+|Running On|geonames 1 node|geonames 3 nodes|nyc_taxis 1 node|nyc_taxis 3 nodes|
 |----------|---------------|----------------|----------------|-----------------|
 |vms       |81.3k/s        |32.8k/s         |54.6k/s         |53.6k/s          |
 |aks       |8.4k/s         |9.1k/s          |17.1k/s         |8.3k/s           |
