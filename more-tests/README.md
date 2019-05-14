@@ -20,3 +20,8 @@
   - Elasticsearch 7.0.1
   - 3 node results 31 k/s
   - Best results I've seen on AKS.
+  - Tested on my MacBook (geonames)
+    - 45k doc/s (Elasticsearch running on Mac)
+    - 31k doc/s (Elasticsearch running on Docker on Mac)
+    
+  
