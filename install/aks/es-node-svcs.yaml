@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-0
+spec:
+  type: ClusterIP
+  #clusterIP: None
+  selector:
+    statefulset.kubernetes.io/pod-name: datastore-elasticsearch-0
+  ports:
+  - protocol: TCP
+    port: 9200
+    targetPort: 9200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-1
+spec:
+  type: ClusterIP
+  #clusterIP: None
+  selector:
+    statefulset.kubernetes.io/pod-name: datastore-elasticsearch-1
+  ports:
+  - protocol: TCP
+    port: 9200
+    targetPort: 9200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-2
+spec:
+  type: ClusterIP
+  #clusterIP: None
+  selector:
+    statefulset.kubernetes.io/pod-name: datastore-elasticsearch-2
+  ports:
+  - protocol: TCP
+    port: 9200
+    targetPort: 9200
