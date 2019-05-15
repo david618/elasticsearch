@@ -230,3 +230,41 @@ Against Docker image running locally limited to 2G mem.
 |   All |                                                     error rate | index-append |           0 |      % |
 
 
+
+### Test ES 7 david62243/elasticsearch:7-3node
+
+The docker image was created by me based on CentOS 7.5 and as close as possible to what we did on VM's.
+
+The Docker image and the Kubernetes are pretty rough; this is my first attempt to create these on my Own.
+
+The Dockerfile contains are install.
+
+The manifests 
+- es-svcs.yaml (Creates services)
+- es3.yaml (Creates a stateful set)
+
+
+```
+esrally configure
+esrally --track=geonames --target-hosts=es:9200 --pipeline=benchmark-only --include-tasks="delete-index,create-index,index-append" --report-file=report.md
+```
+
+Not using any Persistent Storage
+
+
+|   Lap |                                                         Metric |         Task |     Value |   Unit |
+|------:|---------------------------------------------------------------:|-------------:|----------:|-------:|
+|   All |                                                 Min Throughput | index-append |   83768.6 | docs/s |
+|   All |                                              Median Throughput | index-append |   85640.7 | docs/s |
+|   All |                                                 Max Throughput | index-append |   86093.2 | docs/s |
+
+These are best numbers I've seen.
+
+```
+esrally configure
+esrally --track=nyc_taxis --target-hosts=es-0:9200,es-1:9200,es-2:9200 --pipeline=benchmark-only --include-tasks="delete-index,create-index,index" --report-file=report.md
+```
+
+The drive I/O could be the biggest impact on throughtput.
+
+Next step is add persistent volume to by deployment and test again.
