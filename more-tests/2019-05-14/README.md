@@ -265,6 +265,8 @@ esrally configure
 esrally --track=nyc_taxis --target-hosts=es-0:9200,es-1:9200,es-2:9200 --pipeline=benchmark-only --include-tasks="delete-index,create-index,index" --report-file=report.md
 ```
 
+The esrally pod was "evicted" before the test was started.  Describe pod said it was out of disk space. 
+
 The drive I/O could be the biggest impact on throughtput.
 
 Next step is add persistent volume to by deployment and test again.
