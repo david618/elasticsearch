@@ -11,7 +11,7 @@
  |One               |noaa    |59k docs/s     |
  |Three             |noaa    |70k docs/s     |
  
- Seconds test of noaa with three ES nodes was 35k docs/s.
+ Second test of noaa with three ES nodes was 35k docs/s.
  
  Throughtput of three nodes is almost the same as one node. 
  
@@ -23,5 +23,7 @@
   - Tested on my MacBook (geonames)
     - 45k doc/s (Elasticsearch running on Mac)
     - 31k doc/s (Elasticsearch running on Docker on Mac)
+  - First test on my Docker Image (86k/s)
+    - Best rate I've seen so far from esRally
+    - This install did not have persistent drives 
     
-  
