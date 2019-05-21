@@ -1,6 +1,8 @@
 
 ## Repeat Tests
 
+**NOTE:** These tests were done with only index-append operation.  I need to rerun and include delete-index and create-index.
+
 ### NOAA dataset
 
 - 33 Million Rows
