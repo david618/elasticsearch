@@ -27,3 +27,10 @@
     - Best rate I've seen so far from esRally
     - This install did not have persistent drives 
     
+- [2019-05-21](./2019-05-21)
+  - Repeated tests done last week
+  - Tried repeating test above that gave 86k/s; now it's 6 to 7k/s (Not sure what changed)
+  - Most of the other tests Helm chart, and Elastic Operator all came in around 30k/s
+  
+  
+ 
