@@ -157,7 +157,7 @@ Increased from two to three nodes.
 
 ```
 esrally configure
-esrally --track=geonames --target-hosts=es-data-simple:9200 --pipeline=benchmark-only --include-tasks="index-append" --report-file=report.md
+esrally --track=geonames --target-hosts=datastore-elasticsearch-client:9200 --pipeline=benchmark-only --include-tasks="index-append" --report-file=report.md
 ```
 
 |   Lap |                                                         Metric |          Task |    Value |   Unit |
@@ -189,7 +189,7 @@ Ran a test
 
 ```
 esrally configure
-esrally --track=geonames --target-hosts=datastore-elasticsearch-client:9200 --pipeline=benchmark-only --include-tasks="index-append" --report-file=report.md
+esrally --track=geonames --target-hosts=es-data-simple:9200 --pipeline=benchmark-only --include-tasks="index-append" --report-file=report.md
 ```
 
 |   Lap |                                                         Metric |          Task |    Value |   Unit |
