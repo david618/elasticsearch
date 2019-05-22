@@ -278,3 +278,40 @@ curl 10.240.0.11:9200/weather-data-2016?pretty
 ```
 
 
+
+### Updated Esrally Docker Image 
+
+Changed from Deployment to StatefulSet
+
+The image now starts with esrally already configured for /opt/rally
+
+esrally configure --advanced-config
+- benchmark root: /opt/rally
+- Defaults for rest
+
+I copied the rally.ini file into the docker image; so now it will be configured on startup.
+
+### Using esrally-ss 
+
+This is a Stateful Set version of Esrally; which includes a Persistent Volume
+
+#### Start Monitor
+
+```
+kubectl exec -it rttest-mon-0 tmux
+
+curl -XDELETE http://datastore-elasticsearch-client:9200/geonames
+
+java -cp target/rttest.jar com.esri.rttest.mon.ElasticIndexMon http://datastore-elasticsearch-client:9200/geonames
+```
+
+### Run Test
+
+```
+esrally --track=geonames --target-hosts=datastore-elasticsearch-client:9200 --pipeline=benchmark-only --include-tasks="delete-index,create-index,index-append" --report-file=report.md
+```
+
+- ElasticIndexMon: 99k/s
+- esrally: ``[WARNING] No throughput metrics available for [index-append]. Likely cause: The benchmark ended already during warmup.``
+
+Now you can delete pod and start new test without having to run esrally configure and if data is downloaded it won't need to download again.
