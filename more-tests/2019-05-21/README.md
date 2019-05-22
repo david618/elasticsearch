@@ -215,5 +215,5 @@ java -cp target/rttest.jar com.esri.rttest.mon.ElasticIndexMon http://es-data-si
 ```
 
 Rate was about the same
-Loading at 300k/s
+Loading at 30k/s
 
