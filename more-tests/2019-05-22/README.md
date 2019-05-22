@@ -5,6 +5,27 @@
 
 Created Azure Cluster with 3 D16sv3 nodes and installed Elasticsearch 7.0.0 on those nodes.
 
+#### From boot
+
+##### Install git 
+
+Esrally needs 1.9 or later the git that comes in epel-release (Centos 7 is 1.8); the following script installs a version of git that is version 2.2.
+
+```
+sudo yum remove git
+sudo yum -y install  https://centos7.iuscommunity.org/ius-release.rpm
+sudo yum -y install  git2u-all
+```
+
+##### Install Esrally CentOS 7.5
+
+```
+sudo yum install -y gcc python34.x86_64 python34-devel.x86_64 python34-pip.noarch
+sudo yum -y install java-1.8.0-openjdk
+sudo pip3.4 install esrally
+```
+
+
 #### geonames
 
 ```
