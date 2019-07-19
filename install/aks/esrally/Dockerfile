@@ -7,8 +7,12 @@ RUN apt-get update && \
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
 
-RUN pip3 install esrally 
+RUN pip3 install esrally
+
+RUN mkdir -p /root/.rally 
 
 EXPOSE 8001/tcp
+
+COPY rally.ini /root/.rally/rally.ini
 
 WORKDIR /root
